@@ -1,0 +1,202 @@
+[
+  {
+    "product_id": "L101",
+    "product_title": "Laptop Pro 15",
+    "product_image": "https://computermania-bd.b-cdn.net/wp-content/uploads/Asus-Vivobook-Pro-15-Price-in-BD.jpg",
+    "category": {
+      "name": "Laptops",
+      "id": "CAT001"
+    },
+    "price": 1299.99,
+    "description": "High-performance laptop with 15-inch display, perfect for multitasking.",
+    "Specification": ["15-inch Retina display", "16GB RAM", "512GB SSD"],
+    "availability": true,
+    "rating": 4.7
+  },
+  {
+    "product_id": "L102",
+    "product_title": "Gaming Laptop Z5",
+    "product_image": "https://computermania-bd.b-cdn.net/wp-content/uploads/Acer-Nitro-V-15-Gaming-Laptop-4.jpg",
+    "category": {
+      "name": "Laptops",
+      "id": "CAT001"
+    },
+    "price": 1499.99,
+    "description": "Powerful gaming laptop with a high refresh rate display and graphics card.",
+    "Specification": ["17-inch FHD display", "32GB RAM", "NVIDIA RTX 3060"],
+    "availability": true,
+    "rating": 4.8
+  },
+  {
+    "product_id": "L103",
+    "product_title": "Laptop Air 13",
+    "product_image": "https://ryans.com/storage/products/main/apple-macbook-air-early-2024-apple-m3-chip-16gb-11711531892.webp",
+    "category": {
+      "name": "Laptops",
+      "id": "CAT001"
+    },
+    "price": 999.99,
+    "description": "Lightweight and portable laptop with a long battery life.",
+    "Specification": ["13-inch Retina display", "8GB RAM", "256GB SSD"],
+    "availability": true,
+    "rating": 4.5
+  },
+  {
+    "product_id": "L104",
+    "product_title": "Ultrabook S",
+    "product_image": "https://computermania-bd.b-cdn.net/wp-content/uploads/ASUS-8-4.jpg",
+    "category": {
+      "name": "Laptops",
+      "id": "CAT001"
+    },
+    "price": 1199.99,
+    "description": "Sleek ultrabook with fast SSD and excellent battery performance.",
+    "Specification": ["14-inch display", "16GB RAM", "512GB SSD"],
+    "availability": true,
+    "rating": 4.6
+  },
+  {
+    "product_id": "L105",
+    "product_title": "Laptop X1 Carbon",
+    "product_image": "https://adminapi.applegadgetsbd.com/storage/media/large/Lenovo-ThinkPad-X1-Carbon-Gen-10-1127.jpg",
+    "category": {
+      "name": "Laptops",
+      "id": "CAT001"
+    },
+    "price": 1399.99,
+    "description": "Durable laptop with business-grade security features and high performance.",
+    "Specification": ["14-inch FHD display", "16GB RAM", "1TB SSD"],
+    "availability": false,
+    "rating": 4.4
+  },
+  {
+    "product_id": "L106",
+    "product_title": "Convertible Laptop Y",
+    "product_image": "https://img001.video2b.com/1018/file_11645599926700.jpg?x-oss-process=image/resize,m_lfit,w_768/format,webp/quality,100",
+    "category": {
+      "name": "Laptops",
+      "id": "CAT001"
+    },
+    "price": 1099.99,
+    "description": "Convertible laptop with touchscreen and stylus support.",
+    "Specification": ["13.3-inch touchscreen", "12GB RAM", "512GB SSD"],
+    "availability": true,
+    "rating": 4.6
+  },
+  {
+    "product_id": "SP201",
+    "product_title": "Apple-iPhone-X",
+    "product_image": "https://i5.walmartimages.com/seo/Apple-iPhone-X-256GB-5-8-4G-LTE-CDMA-nbsp-Unlocked-nbsp-Space-Gray-nbsp-Scratch-And-Dent-Used_ed0fdfb9-1453-43b6-8750-fdf692b2557e.a1edc202c9b5562a64cfc659881ee2b1.jpeg",
+    "category": {
+      "name": "SmartPhone",
+      "id": "CAT002"
+    },
+    "price": 799.99,
+    "description": "Latest smartphone with AI camera and enhanced battery life.",
+    "Specification": ["6.1-inch OLED display", "128GB storage", "Dual SIM"],
+    "availability": true,
+    "rating": 4.5
+  },
+  {
+    "product_id": "SP202",
+    "product_title": "iPhone 16 Pro Max",
+    "product_image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-16-Pro-Max---16-Pro-Desert-Titanium-1929.jpg",
+    "category": {
+      "name": "SmartPhone",
+      "id": "CAT002"
+    },
+    "price": 899.99,
+    "description": "High-end smartphone with advanced camera and fast charging.",
+    "Specification": [
+      "6.7-inch display",
+      "256GB storage",
+      "Triple camera system"
+    ],
+    "availability": true,
+    "rating": 4.7
+  },
+  {
+    "product_id": "SW301",
+    "product_title": "Apple Watch Series 5",
+    "product_image": "https://i5.walmartimages.com/seo/Pre-Owned-Apple-Watch-Series-5-GPS-Only-44mm-Smartwatch_1a5f0fb9-c759-4f34-93b7-3cf2b9447c96.f07cc76f54ed2821db37d12344a7b810.jpeg",
+    "category": {
+      "name": "SmartWatch",
+      "id": "CAT003"
+    },
+    "price": 299.99,
+    "description": "Smartwatch with fitness tracking and heart rate monitoring.",
+    "Specification": ["1.6-inch display", "GPS enabled", "Heart rate monitor"],
+    "availability": true,
+    "rating": 4.6
+  },
+  {
+    "product_id": "SW302",
+    "product_title": "Smart Watch Fit",
+    "product_image": "https://images-cdn.ubuy.qa/6563baa35d2bfd3a8803111f-smart-watch-fits-for-android-and-iphone.jpg",
+    "category": {
+      "name": "SmartWatch",
+      "id": "CAT003"
+    },
+    "price": 199.99,
+    "description": "Affordable smartwatch with essential fitness tracking features.",
+    "Specification": ["1.4-inch display", "Step counter", "Sleep tracking"],
+    "availability": false,
+    "rating": 4.3
+  },
+  {
+    "product_id": "AC401",
+    "product_title": "Bluetooth Earbuds",
+    "product_image": "https://aqw.co.nz/cdn/shop/files/O1CN015h3Yg726l6vwHzQSJ__2207519327701-0-cib.jpg?v=1718661379",
+    "category": {
+      "name": "Accessories",
+      "id": "CAT004"
+    },
+    "price": 129.99,
+    "description": "Wireless Bluetooth earbuds with noise cancellation.",
+    "Specification": ["Bluetooth 5.0", "20-hour battery", "Water-resistant"],
+    "availability": true,
+    "rating": 4.5
+  },
+  {
+    "product_id": "AC402",
+    "product_title": "Wireless Charger Pad",
+    "product_image": "https://www.startech.com.bd/image/cache/catalog/mobile-accessories/mcdodo/ch-706/ch-706-01-500x500.webp",
+    "category": {
+      "name": "Accessories",
+      "id": "CAT004"
+    },
+    "price": 39.99,
+    "description": "Fast wireless charging pad for compatible devices.",
+    "Specification": ["15W charging", "USB-C input", "LED indicator"],
+    "availability": true,
+    "rating": 4.4
+  },
+  {
+    "product_id": "MB501",
+    "product_title": "MacBook Air 13",
+    "product_image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/refurb-macbook-air-space-gray-m1-202010?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1634145627000",
+    "category": {
+      "name": "MacBook",
+      "id": "CAT005"
+    },
+    "price": 999.99,
+    "description": "Thin and light MacBook with powerful M1 chip.",
+    "Specification": ["13-inch Retina display", "8GB RAM", "256GB SSD"],
+    "availability": true,
+    "rating": 4.8
+  },
+  {
+    "product_id": "MB502",
+    "product_title": "MacBook Pro 16",
+    "product_image": "https://smartbd.com/wp-content/webp-express/webp-images/uploads/2023/06/apple-macbook-pro-mnw83-m2-pro-x28-512gb-x29-16-x22-space-grey-16068-p.jpg.webp",
+    "category": {
+      "name": "MacBook",
+      "id": "CAT005"
+    },
+    "price": 2399.99,
+    "description": "High-performance MacBook Pro with M1 Max chip for professionals.",
+    "Specification": ["16-inch Retina display", "32GB RAM", "1TB SSD"],
+    "availability": true,
+    "rating": 4.9
+  }
+]

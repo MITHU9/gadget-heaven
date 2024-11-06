@@ -1,9 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useGadgetContext } from "../context/Context";
+import { useEffect } from "react";
 
 const Categories = () => {
   const { category, getProductsByCategory } = useGadgetContext();
-  //console.log(category);
+  const location = useLocation();
+  const categoryItem = location.pathname.split("/")[1];
+
+  useEffect(() => {
+    getProductsByCategory(categoryItem || "all");
+  }, [categoryItem, category]);
 
   return (
     <div className="bg-white p-8 text-center rounded-lg  md:col-span-2 lg:col-span-1 w-full md:place-self-start">

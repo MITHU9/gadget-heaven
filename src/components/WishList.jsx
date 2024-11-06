@@ -85,9 +85,9 @@ const WishList = ({ data, setValue }) => {
         {wishItem?.map((item) => (
           <div
             key={item.product_id}
-            className="flex items-center justify-between max-w-6xl mx-auto px-8 lg:px-6 py-8 bg-white rounded-lg w-3/4"
+            className="flex items-center justify-between max-w-6xl mx-auto px-8 lg:px-6 py-8 bg-white rounded-lg md:w-3/4"
           >
-            <div className="flex items-center gap-6 ">
+            <div className="flex flex-col md:flex-row items-center gap-6 ">
               <div className="size-24">
                 <img
                   src={item.product_image}

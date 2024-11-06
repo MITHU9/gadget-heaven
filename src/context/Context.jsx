@@ -6,14 +6,15 @@ import {
 } from "../utility/AddToLocalStorage";
 
 export const GadgetContext = createContext({
-  gadgets: [],
+  product: [],
   addGadgetToCart: () => {},
   addToWishlist: () => {},
   removeGadget: () => {},
   getProductsByCategory: () => {},
+  getProductById: () => {},
 });
 
-const ContextProvider = ({ children }) => {
+const ContextProvider = ({ children = {} }) => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -25,6 +26,10 @@ const ContextProvider = ({ children }) => {
     setFilteredProducts(
       products.filter((product) => product.category.name === category)
     );
+  };
+
+  const getProductById = (id) => {
+    return products.find((product) => product.product_id === id);
   };
 
   const addGadgetToCart = (id) => {
@@ -74,8 +79,6 @@ const ContextProvider = ({ children }) => {
     setCart(getCartData);
   }, [upDate]);
 
-  //console.log(quantity(cart));
-
   return (
     <GadgetContext.Provider
       value={{
@@ -84,6 +87,7 @@ const ContextProvider = ({ children }) => {
         category,
         setCategory,
         getProductsByCategory,
+        getProductById,
         filteredProducts,
         addGadgetToCart,
         addToWishlist,

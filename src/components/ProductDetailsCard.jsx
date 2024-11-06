@@ -18,8 +18,6 @@ const ProductDetailsCard = ({ details }) => {
     return acc + item.price * itemQuantity;
   }, 0);
 
-  //console.log(parseInt(totalCost));
-
   const handleAddToCart = (id, price) => {
     if (parseInt(totalCost) < 5000 && price < 5000 - parseInt(totalCost)) {
       addGadgetToCart(id);
@@ -84,7 +82,7 @@ const ProductDetailsCard = ({ details }) => {
       <div className="flex flex-col md:flex-row items-center justify-evenly md:gap-8 md:w-3/4 mx-auto bg-white p-4 rounded-xl">
         <div>
           <img
-            className="w-full h-[400px] object-contain rounded-xl"
+            className="w-full md:h-[400px] object-contain rounded-xl"
             src={details.product_image}
             alt={details.product_title}
           />

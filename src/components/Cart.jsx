@@ -78,7 +78,7 @@ const Cart = ({ cartItem }) => {
         {cartItem?.map((item) => (
           <div
             key={item.product_id}
-            className="flex items-center justify-between w-full max-w-6xl mx-auto px-8 lg:px-6 py-8 bg-white rounded-lg "
+            className="flex items-center justify-between w-full max-w-6xl mx-auto px-8 lg:px-6 py-8 bg-white rounded-lg md:w-3/4"
           >
             <div className="flex flex-col md:flex-row items-center gap-6 ">
               <div className="size-24">

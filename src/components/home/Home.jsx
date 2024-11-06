@@ -33,11 +33,11 @@ const Home = () => {
         </Hero>
         <HeroImageCard />
       </div>
-      <div className="mt-72 py-6">
-        <h2 className="text-3xl font-bold text-center">
+      <div className="mt-28 md:mt-72 py-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-center">
           Explore Cutting-Edge Gadgets
         </h2>
-        <div className="py-8 grid grid-cols-6 gap-3 lg:px-24">
+        <div className="py-8 grid grid-cols-1 md:grid-cols-6 gap-3 lg:px-24 place-items-center">
           <Categories />
           <Products />
         </div>

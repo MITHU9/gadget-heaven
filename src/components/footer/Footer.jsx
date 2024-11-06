@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className=" bg-white flex items-center justify-center mt-52 lg:mt-72 p-10 flex-col">
+    <footer className=" bg-white flex items-center justify-center md:mt-52 lg:mt-72 p-10 flex-col">
       <div className="text-center py-4">
         <h1 className="text-3xl font-bold">Gadget Heaven</h1>
         <p className="text-gray-500 font-semibold py-2">
@@ -10,7 +10,7 @@ const Footer = () => {
 
       <hr className="bg-slate-300 w-full" />
 
-      <div className="w-full flex items-center justify-evenly  text-gray-600 mt-6">
+      <div className="w-full flex flex-wrap items-center md:justify-evenly gap-8 md:gap-0  text-gray-600 mt-6">
         <nav className="flex flex-col">
           <h6 className="footer-title text-black">Services</h6>
           <a className="link link-hover">Product Support</a>

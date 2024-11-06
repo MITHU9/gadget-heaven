@@ -71,7 +71,7 @@ export default class Statistics extends PureComponent {
           />
         </div>
 
-        <div className="max-w-7xl mx-auto">
+        <div className="md:max-w-7xl mx-auto mb-3">
           <div className="py-6">
             <h3 className="text-2xl font-bold text-gray-800">Statistics</h3>
           </div>
@@ -100,7 +100,7 @@ export default class Statistics extends PureComponent {
                   fill="#9538B1"
                   stroke="#9538E2"
                 />
-                <Bar dataKey="price" barSize={32} fill="#9538E2" />
+                <Bar dataKey="price" barSize={28} fill="#9538E2" />
                 <Line type="monotone" dataKey="Total" stroke="#ff7300" />
                 <Scatter dataKey="rating" fill="red" />
               </ComposedChart>

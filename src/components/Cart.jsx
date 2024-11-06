@@ -13,7 +13,10 @@ const Cart = ({ cartItem }) => {
 
   const items = quantity(cart);
 
-  let totalCost = cartItem?.reduce((acc, item) => acc + item.price, 0);
+  let totalCost = cartItem?.reduce((acc, item) => {
+    const itemQuantity = items[item.product_id];
+    return acc + item.price * itemQuantity;
+  }, 0);
 
   const handleSort = () => {
     cartItem?.sort((a, b) => b.price - a.price);
@@ -32,24 +35,25 @@ const Cart = ({ cartItem }) => {
     window.location.reload();
   };
 
-  //console.log(items);
+  // console.log(itemQuantity);
+  // console.log(items);
 
   return (
     <div>
-      <div className="flex items-center justify-between max-w-6xl mx-auto px-8 lg:px-0 py-8">
-        <h2 className="text-2xl font-bold">Cart</h2>
+      <div className="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto md:px-8 lg:px-0 py-8">
+        <h2 className="text-2xl font-bold py-3 md:py-0">Cart</h2>
         <div
-          className="flex items-center gap-6
+          className="flex items-center gap-1 md:gap-6
         "
         >
-          <h2 className="text-xl font-bold">
+          <h2 className="text-xl flex-1 font-bold ">
             Total Cost: ${totalCost.toFixed(2)}
           </h2>
           <button
             onClick={handleSort}
             className="flex items-center gap-2 rounded-full border p-[2px] bg-gradient-to-b from-blue-500 via-purple-500 to-pink-400 font-semibold text-primary"
           >
-            <div className="w-full h-full bg-white flex gap-2 items-center px-4 py-1.5 rounded-full">
+            <div className="w-full h-full bg-white flex gap-1 md:gap-2 items-center px-4 py-1.5 rounded-full">
               <span>Sort by Price</span>
               <FaSortAmountDown />
             </div>
@@ -70,13 +74,13 @@ const Cart = ({ cartItem }) => {
         </div>
       </div>
 
-      <div className="flex w-full flex-col items-center gap-4">
+      <div className="flex w-full flex-col items-center gap-4 mb-3">
         {cartItem?.map((item) => (
           <div
             key={item.product_id}
-            className="flex items-center justify-between max-w-6xl mx-auto px-8 lg:px-6 py-8 bg-white rounded-lg w-3/4"
+            className="flex items-center justify-between w-full max-w-6xl mx-auto px-8 lg:px-6 py-8 bg-white rounded-lg "
           >
-            <div className="flex items-center gap-6 ">
+            <div className="flex flex-col md:flex-row items-center gap-6 ">
               <div className="size-24">
                 <img
                   src={item.product_image}
@@ -91,10 +95,7 @@ const Cart = ({ cartItem }) => {
                   {item.description}
                 </p>
                 <p className="text-gray-600 font-semibold">
-                  Quantity:{" "}
-                  {Object.entries(items).map(([proc, count]) => (
-                    <span>{proc === item.product_id ? count : ""}</span>
-                  ))}
+                  Quantity: {items[item.product_id]}
                 </p>
                 <h2 className="text-lg font-bold text-gray-600">
                   Price: ${item.price}

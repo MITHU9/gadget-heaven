@@ -20,9 +20,9 @@ function App() {
               location.pathname == "/SmartWatch" ||
               location.pathname == "/Accessories" ||
               location.pathname == "/MacBook"
-                ? "max-w-[90vw] mx-auto"
+                ? "w-full md:max-w-[90vw] mx-auto"
                 : "w-[100vw]"
-            }  px-5`}
+            } px-2 md:px-5`}
           >
             <Navbar />
             <Outlet />

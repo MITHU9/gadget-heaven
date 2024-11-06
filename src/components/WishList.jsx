@@ -8,17 +8,22 @@ import {
 import { useEffect, useState } from "react";
 
 const WishList = ({ data, setValue }) => {
-  const { addGadgetToCart, upDate, cart } = useGadgetContext();
+  const { addGadgetToCart, upDate, cart, quantity } = useGadgetContext();
   const [wishList, setWishList] = useState([]);
+
+  const items = quantity(cart);
 
   const wishItem = data?.filter((item) => wishList.includes(item.product_id));
 
   const cartItem = data?.filter((item) => cart.includes(item.product_id));
 
-  let totalCost = cartItem?.reduce((acc, item) => acc + item.price, 0);
+  let totalCost = cartItem?.reduce((acc, item) => {
+    const itemQuantity = items[item.product_id];
+    return acc + item.price * itemQuantity;
+  }, 0);
 
   const handleAddToCart = (id, price) => {
-    if (parseInt(totalCost) < 4000 && price < 4000 - parseInt(totalCost)) {
+    if (parseInt(totalCost) < 5000 && price < 5000 - parseInt(totalCost)) {
       addGadgetToCart(id);
       removeFromWishListLocalStorage(id);
       toast.success("Item Added to cart Successfully", {
@@ -33,7 +38,7 @@ const WishList = ({ data, setValue }) => {
         transition: Bounce,
       });
     } else {
-      toast.error("You can`t add to cart more than $4000", {
+      toast.error("You can`t add to cart more than $5000", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,

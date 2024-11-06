@@ -10,11 +10,17 @@ import {
 
 const Navbar = () => {
   const location = useLocation();
-  const { upDate, wishList, setWishList, cart, products } = useGadgetContext();
+  const { upDate, wishList, setWishList, cart, products, quantity } =
+    useGadgetContext();
+
+  const items = quantity(cart);
 
   const cartItem = products?.filter((item) => cart.includes(item.product_id));
 
-  let totalCost = cartItem?.reduce((acc, item) => acc + item.price, 0);
+  let totalCost = cartItem?.reduce((acc, item) => {
+    const itemQuantity = items[item.product_id];
+    return acc + item.price * itemQuantity;
+  }, 0);
 
   const handleCart = () => {
     const cart = document.getElementById("cart");
@@ -38,8 +44,8 @@ const Navbar = () => {
         location.pathname == "/Accessories" ||
         location.pathname == "/MacBook"
           ? "bg-primary  text-white/80"
-          : "w-[90vw] mx-auto lg:px-20"
-      }  rounded-lg rounded-bl-none rounded-br-none px-10`}
+          : "w-full md:w-[90vw] mx-auto lg:px-20"
+      }  rounded-lg rounded-bl-none rounded-br-none md:px-10`}
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -77,7 +83,9 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl font-bold ">Gadget Heaven</a>
+        <a className="btn btn-ghost text-xl md:text-2xl font-bold ">
+          Gadget Heaven
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className=" flex items-center gap-5 font-semibold ">
@@ -131,7 +139,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end flex gap-6 relative">
+      <div className="navbar-end flex gap-3 items-center md:gap-6 relative">
         <a
           onClick={handleCart}
           className="p-2 bg-white text-black relative cursor-pointer rounded-full"
@@ -143,7 +151,7 @@ const Navbar = () => {
             </span>
           )}
         </a>
-        <a className="p-2 cursor-pointer relative text-black bg-white rounded-full">
+        <a className="p-2 cursor-pointer relative text-black bg-white rounded-full mr-1">
           <CiHeart />
           {wishList.length > 0 && (
             <span className="absolute -top-4 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">

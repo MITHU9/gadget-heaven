@@ -3,19 +3,25 @@ import { FaShoppingCart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { useGadgetContext } from "../context/Context";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import ReactStars from "react-rating-stars-component";
 
 const ProductDetailsCard = ({ details }) => {
-  const { addGadgetToCart, addToWishlist, wishList, cart, products } =
+  const { addGadgetToCart, addToWishlist, wishList, cart, products, quantity } =
     useGadgetContext();
+
+  const items = quantity(cart);
 
   const cartItem = products?.filter((item) => cart.includes(item.product_id));
 
-  let totalCost = cartItem?.reduce((acc, item) => acc + item.price, 0);
+  let totalCost = cartItem?.reduce((acc, item) => {
+    const itemQuantity = items[item.product_id];
+    return acc + item.price * itemQuantity;
+  }, 0);
 
   //console.log(parseInt(totalCost));
 
   const handleAddToCart = (id, price) => {
-    if (parseInt(totalCost) < 4000 && price < 4000 - parseInt(totalCost)) {
+    if (parseInt(totalCost) < 5000 && price < 5000 - parseInt(totalCost)) {
       addGadgetToCart(id);
       toast.success("Item Added to cart Successfully", {
         position: "top-center",
@@ -29,7 +35,7 @@ const ProductDetailsCard = ({ details }) => {
         transition: Bounce,
       });
     } else {
-      toast.error("You can`t add to cart more than $4000", {
+      toast.error("You can`t add to cart more than $5000", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -74,8 +80,8 @@ const ProductDetailsCard = ({ details }) => {
   };
 
   return (
-    <div className="absolute top-1/2 lg:left-20 lg:w-11/12 mx-auto">
-      <div className="flex items-center justify-evenly gap-8 w-3/4 mx-auto bg-white p-4 rounded-xl">
+    <div className="absolute top-48  md:top-1/2 lg:left-20 lg:w-11/12 mx-auto">
+      <div className="flex flex-col md:flex-row items-center justify-evenly md:gap-8 md:w-3/4 mx-auto bg-white p-4 rounded-xl">
         <div>
           <img
             className="w-full h-[400px] object-contain rounded-xl"
@@ -107,11 +113,15 @@ const ProductDetailsCard = ({ details }) => {
             <FaStar className="text-yellow-500" />
           </h2>
           <div className="flex items-center gap-1">
-            {[...Array(parseInt(details.rating))].map((_, idx) => (
-              <FaStar key={idx} className="text-yellow-500" />
-            ))}
-            <FaStar />
-            <span>{details.rating}</span>
+            <ReactStars
+              value={details.rating}
+              count={5}
+              isHalf={true}
+              size={24}
+              edit={false}
+              activeColor="#ffd700"
+            />
+            <span className="pt-1 font-semibold">{details.rating}</span>
           </div>
           <div className="flex items-center gap-2 py-2">
             <button

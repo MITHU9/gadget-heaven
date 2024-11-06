@@ -6,7 +6,7 @@ const Categories = () => {
   //console.log(category);
 
   return (
-    <div className="bg-white p-8 text-center rounded-lg col-span-2 lg:col-span-1 place-self-start">
+    <div className="bg-white p-8 text-center rounded-lg  md:col-span-2 lg:col-span-1 w-full md:place-self-start">
       <ul className="flex flex-col gap-3 font-semibold text-gray-600">
         <li>
           <NavLink

@@ -14,15 +14,20 @@ const Hero = ({ children, title, description }) => {
         location.pathname == "/SmartPhone" ||
         location.pathname == "/SmartWatch" ||
         location.pathname == "/Accessories" ||
-        location.pathname == "/MacBook" ||
-        location.pathname == `/product-details/${id}`
-          ? "rounded-lg rounded-tl-none rounded-tr-none pb-72 "
-          : "-ml-8 -mr-4"
+        location.pathname == "/MacBook"
+          ? "rounded-lg rounded-tl-none rounded-tr-none md:pb-72 pb-24"
+          : `-ml-4 -mr-2 md:-ml-8 md:-mr-4 ${
+              location.pathname == `/product-details/${id}`
+                ? "md:pb-72 pb-24"
+                : ""
+            }`
       } "`}
     >
       <div className="hero-content text-center ">
-        <div className="max-w-[60vw]">
-          <h1 className="text-5xl font-bold text-white/90">{title}</h1>
+        <div className="md:max-w-[60vw]">
+          <h1 className="text-2xl md:text-5xl font-bold text-white/90">
+            {title}
+          </h1>
           <p className="py-6 font-semibold text-gray-300 max-w-3xl mx-auto">
             {description}
           </p>

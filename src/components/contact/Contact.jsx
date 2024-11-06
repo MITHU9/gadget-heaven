@@ -14,9 +14,9 @@ const Contact = () => {
           description="We would love to hear from you"
         />
       </div>
-      <div className="max-w-7xl mx-auto py-8 border mt-4 rounded-lg shadow-lg">
+      <div className="max-w-7xl mx-auto py-8 border mt-4 rounded-lg shadow-lg mb-3">
         <form className="flex flex-col gap-5 p-5">
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               placeholder="Enter your name..."
@@ -28,7 +28,7 @@ const Contact = () => {
               className="p-2 outline-none flex-1 border border-gray-300 rounded-lg"
             />
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               placeholder="Enter your phone number..."

@@ -16,7 +16,6 @@ const ProductDetailsCard = ({ details }) => {
 
   const handleAddToCart = (id, price) => {
     if (parseInt(totalCost) < 4000 && price < 4000 - parseInt(totalCost)) {
-      console.log("Total Cost", totalCost);
       addGadgetToCart(id);
       toast.success("Item Added to cart Successfully", {
         position: "top-center",

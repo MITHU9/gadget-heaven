@@ -4,11 +4,14 @@ import { MdOutlineDelete } from "react-icons/md";
 import successImg from "../assets/Group.png";
 import { removeFromCartLocalStorage } from "../utility/AddToLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { useGadgetContext } from "../context/Context";
 
 const Cart = ({ cartItem }) => {
-  //console.log(cartItem);
+  const { quantity, cart } = useGadgetContext();
   const [render, setRender] = useState(false);
   const route = useNavigate();
+
+  const items = quantity(cart);
 
   let totalCost = cartItem?.reduce((acc, item) => acc + item.price, 0);
 
@@ -29,7 +32,7 @@ const Cart = ({ cartItem }) => {
     window.location.reload();
   };
 
-  //console.log(cart);
+  //console.log(items);
 
   return (
     <div>
@@ -86,6 +89,12 @@ const Cart = ({ cartItem }) => {
 
                 <p className="text-gray-400 font-semibold">
                   {item.description}
+                </p>
+                <p className="text-gray-600 font-semibold">
+                  Quantity:{" "}
+                  {Object.entries(items).map(([proc, count]) => (
+                    <span>{proc === item.product_id ? count : ""}</span>
+                  ))}
                 </p>
                 <h2 className="text-lg font-bold text-gray-600">
                   Price: ${item.price}

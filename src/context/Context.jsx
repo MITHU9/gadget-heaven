@@ -37,10 +37,18 @@ const ContextProvider = ({ children }) => {
     setUpDate(!upDate);
   };
 
-  //console.log(cart);
+  const quantity = (arr) => {
+    let count = arr?.reduce((acc, item) => {
+      if (!acc[item]) {
+        acc[item] = 1;
+      } else {
+        acc[item] += 1;
+      }
+      return acc;
+    }, {});
 
-  //console.log(products);
-  //console.log(details);
+    return count;
+  };
 
   useEffect(() => {
     fetch("/data.json")
@@ -66,7 +74,7 @@ const ContextProvider = ({ children }) => {
     setCart(getCartData);
   }, [upDate]);
 
-  //console.log(category);
+  //console.log(quantity(cart));
 
   return (
     <GadgetContext.Provider
@@ -83,6 +91,7 @@ const ContextProvider = ({ children }) => {
         wishList,
         setWishList,
         cart,
+        quantity,
       }}
     >
       {children}

@@ -10,11 +10,11 @@ const Hero = ({ children, title, description }) => {
     <div
       className={`"hero bg-primary flex items-center justify-center ${
         location.pathname == "/" ||
-        location.pathname == "/Laptops" ||
-        location.pathname == "/SmartPhone" ||
-        location.pathname == "/SmartWatch" ||
-        location.pathname == "/Accessories" ||
-        location.pathname == "/MacBook"
+        location.pathname == "/home/Laptops" ||
+        location.pathname == "/home/SmartPhone" ||
+        location.pathname == "/home/SmartWatch" ||
+        location.pathname == "/home/Accessories" ||
+        location.pathname == "/home/MacBook"
           ? "rounded-lg rounded-tl-none rounded-tr-none md:pb-72 pb-24"
           : `-ml-4 -mr-2 md:-ml-8 md:-mr-4 ${
               location.pathname == `/product-details/${id}`

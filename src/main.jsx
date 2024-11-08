@@ -21,25 +21,25 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: ":category",
+        path: "/home/:category",
         element: <Home />,
       },
       {
-        path: "statistics",
+        path: "/statistics",
         element: <Statistics />,
       },
       {
-        path: "dashboard",
+        path: "/dashboard",
         element: <Dashboard />,
         loader: () => fetch("/data.json").then((res) => res.json()),
       },
       {
-        path: "feedback",
+        path: "/feedback",
         element: <Contact />,
       },
 
       {
-        path: "product-details/:id",
+        path: "/product-details/:id",
         element: <ProductDetails />,
         loader: () => fetch("/data.json").then((res) => res.json()),
       },

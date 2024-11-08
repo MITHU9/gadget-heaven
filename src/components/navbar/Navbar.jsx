@@ -38,11 +38,11 @@ const Navbar = () => {
     <div
       className={`navbar mt-2 py-6 ${
         location.pathname == "/" ||
-        location.pathname == "/Laptops" ||
-        location.pathname == "/SmartPhone" ||
-        location.pathname == "/SmartWatch" ||
-        location.pathname == "/Accessories" ||
-        location.pathname == "/MacBook"
+        location.pathname == "/home/Laptops" ||
+        location.pathname == "/home/SmartPhone" ||
+        location.pathname == "/home/SmartWatch" ||
+        location.pathname == "/home/Accessories" ||
+        location.pathname == "/home/MacBook"
           ? "bg-primary  text-white/80"
           : "w-full md:w-[90vw] mx-auto lg:px-20"
       }  rounded-lg rounded-bl-none rounded-br-none md:px-10`}
@@ -92,6 +92,7 @@ const Navbar = () => {
           <li className=" hover:text-black rounded-lg">
             <NavLink
               to="/"
+              isActive={true}
               className={({ isActive }) =>
                 isActive
                   ? "bg-gray-300 text-primary  p-2 rounded-lg"

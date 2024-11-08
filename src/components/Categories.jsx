@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const Categories = () => {
   const { category, getProductsByCategory } = useGadgetContext();
   const location = useLocation();
-  const categoryItem = location.pathname.split("/")[1];
+  const categoryItem = location.pathname.split("/home/")[1];
 
   useEffect(() => {
     getProductsByCategory(categoryItem || "all");
@@ -35,7 +35,7 @@ const Categories = () => {
               className="mt-2"
             >
               <NavLink
-                to={`/${item}`}
+                to={`/home/${item}`}
                 className={({ isActive }) =>
                   isActive
                     ? "bg-primary text-white font-semibold px-3 py-2 rounded-full"

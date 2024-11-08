@@ -15,11 +15,11 @@ function App() {
           <div
             className={`${
               location.pathname == "/" ||
-              location.pathname == "/Laptops" ||
-              location.pathname == "/SmartPhone" ||
-              location.pathname == "/SmartWatch" ||
-              location.pathname == "/Accessories" ||
-              location.pathname == "/MacBook"
+              location.pathname == "/home/Laptops" ||
+              location.pathname == "/home/SmartPhone" ||
+              location.pathname == "/home/SmartWatch" ||
+              location.pathname == "/home/Accessories" ||
+              location.pathname == "/home/MacBook"
                 ? "w-full md:max-w-[90vw] mx-auto"
                 : "w-[100vw]"
             } px-2 md:px-5`}

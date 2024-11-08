@@ -14,7 +14,7 @@ const Home = () => {
         <title>
           {location.pathname === "/"
             ? "Gadget"
-            : location.pathname.split("/")[1]}{" "}
+            : location.pathname.split("/home/")[1]}{" "}
           || Gadget Heaven
         </title>
       </Helmet>

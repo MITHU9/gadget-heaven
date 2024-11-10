@@ -4,9 +4,15 @@ import HeroImageCard from "../HeroImageCard";
 import Products from "../Products";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useGadgetContext } from "../../context/Context";
 
 const Home = () => {
   const location = useLocation();
+  const { loading } = useGadgetContext();
+
+  if (loading) {
+    return <span className="loading loading-bars loading-lg"></span>;
+  }
 
   return (
     <div>

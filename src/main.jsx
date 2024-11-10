@@ -9,6 +9,8 @@ import Home from "./components/home/Home.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import ProductDetails from "./components/productDetails/ProductDetails.jsx";
 import Contact from "./components/contact/Contact.jsx";
+import Login from "./components/login/Login.jsx";
+import Register from "./components/register/Register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
         path: "/product-details/:id",
         element: <ProductDetails />,
         loader: () => fetch("/data.json").then((res) => res.json()),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },

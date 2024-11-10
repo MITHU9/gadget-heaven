@@ -8,8 +8,8 @@ import {
 import { useEffect, useState } from "react";
 
 const WishList = ({ data, setValue }) => {
-  const { addGadgetToCart, upDate, cart, quantity } = useGadgetContext();
-  const [wishList, setWishList] = useState([]);
+  const { addGadgetToCart, upDate, cart, quantity, setWishList, wishList } =
+    useGadgetContext();
 
   const items = quantity(cart);
 

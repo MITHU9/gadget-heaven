@@ -3,15 +3,21 @@ import { CiHeart } from "react-icons/ci";
 import { FaShoppingCart } from "react-icons/fa";
 import { useGadgetContext } from "../../context/Context";
 import { useEffect } from "react";
-import {
-  getStoredCartData,
-  getWishListData,
-} from "../../utility/AddToLocalStorage";
+import { getWishListData } from "../../utility/AddToLocalStorage";
 
 const Navbar = () => {
   const location = useLocation();
-  const { upDate, wishList, setWishList, cart, products, quantity } =
-    useGadgetContext();
+  const {
+    upDate,
+    wishList,
+    setWishList,
+    cart,
+    products,
+    quantity,
+    user,
+    signOutUser,
+    loading,
+  } = useGadgetContext();
 
   const items = quantity(cart);
 
@@ -27,12 +33,26 @@ const Navbar = () => {
     cart.classList.toggle("hidden");
   };
 
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("User Signed Out");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     const getWishData = getWishListData();
     setWishList(getWishData);
   }, [upDate]);
 
-  //console.log(cart.length);
+  //console.log(user);
+
+  if (loading) {
+    return <span className="loading loading-bars loading-lg"></span>;
+  }
 
   return (
     <div
@@ -75,9 +95,11 @@ const Navbar = () => {
             <li>
               <NavLink to="/statistics">Statistics</NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
+            {user && (
+              <li>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+            )}
             <li>
               <NavLink to="/feedback">Contact Us</NavLink>
             </li>
@@ -114,18 +136,20 @@ const Navbar = () => {
               Statistics
             </NavLink>
           </li>
-          <li className=" hover:text-black rounded-lg">
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive
-                  ? "bg-gray-300 text-primary p-2 rounded-lg"
-                  : "hover:bg-gray-400 hover:text-black p-1.5 rounded-lg"
-              }
-            >
-              Dashboard
-            </NavLink>
-          </li>
+          {user && (
+            <li className=" hover:text-black rounded-lg">
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-gray-300 text-primary p-2 rounded-lg"
+                    : "hover:bg-gray-400 hover:text-black p-1.5 rounded-lg"
+                }
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          )}
           <li className=" hover:text-black rounded-lg">
             <NavLink
               to="/feedback"
@@ -140,45 +164,73 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end flex gap-3 items-center md:gap-6 relative">
-        <a
-          onClick={handleCart}
-          className="p-2 bg-white text-black relative cursor-pointer rounded-full"
-        >
-          <FaShoppingCart />
-          {cart.length > 0 && (
-            <span className="absolute -top-5 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">
-              {cart.length}
-            </span>
-          )}
-        </a>
-        <a className="p-2 cursor-pointer relative text-black bg-white rounded-full mr-1">
-          <CiHeart />
-          {wishList.length > 0 && (
-            <span className="absolute -top-4 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">
-              {wishList.length}
-            </span>
-          )}
-        </a>
-        <div
-          id="cart"
-          className="absolute hidden translate-all bg-white top-12 right-8 px-6 rounded-lg py-1 z-20"
-        >
-          <h2 className="text-xl font-bold text-gray-600">
-            {cart.length} Items in Cart
-          </h2>
-          <hr className="mt-3 border" />
-          <div className="py-4">
-            <p className="text-primary py-1 text-lg font-semibold">
-              Subtotal: ${totalCost.toFixed(2)}
-            </p>
-            <NavLink
-              to="/dashboard"
-              className="btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
-            >
-              Dashboard
-            </NavLink>
+      <div className="navbar-end flex gap-3 items-center md:gap-6">
+        <div className="flex items-center gap-3 relative">
+          <a
+            onClick={handleCart}
+            className="p-2 bg-white text-black relative cursor-pointer rounded-full"
+          >
+            <FaShoppingCart />
+            {cart.length > 0 && (
+              <span className="absolute -top-5 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">
+                {cart.length}
+              </span>
+            )}
+          </a>
+          <a className="p-2 cursor-pointer relative text-black bg-white rounded-full mr-1">
+            <CiHeart />
+            {wishList.length > 0 && (
+              <span className="absolute -top-4 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">
+                {wishList.length}
+              </span>
+            )}
+          </a>
+
+          <div
+            id="cart"
+            className="absolute hidden translate-all bg-white top-12 right-8 px-6 rounded-lg py-1 z-20 w-[250px]"
+          >
+            <h2 className="text-xl font-bold text-gray-600">
+              {cart.length} Items in Cart
+            </h2>
+            <hr className="mt-3 border" />
+            <div className="py-4">
+              <p className="text-primary py-1 text-lg font-semibold">
+                Subtotal: ${totalCost.toFixed(2)}
+              </p>
+              <NavLink
+                to="/dashboard"
+                className="btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
+              >
+                Dashboard
+              </NavLink>
+            </div>
           </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <NavLink
+            to="/login"
+            onClick={user ? handleSignOut : ""}
+            className={({ isActive }) =>
+              isActive
+                ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
+                : "btn bg-gray-300 text-primary rounded-full px-8 hover:bg-primary hover:text-gray-200"
+            }
+          >
+            {user ? "Logout" : "Login"}
+          </NavLink>
+          {!user && (
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                isActive
+                  ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
+                  : "btn bg-gray-300 text-primary rounded-full px-8 hover:bg-primary hover:text-gray-200"
+              }
+            >
+              Register
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

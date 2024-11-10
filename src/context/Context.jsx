@@ -4,6 +4,15 @@ import {
   addToWishListLocalStorage,
   getStoredCartData,
 } from "../utility/AddToLocalStorage";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../components/lib/firebase";
 
 export const GadgetContext = createContext({
   product: [],
@@ -21,6 +30,27 @@ const ContextProvider = ({ children = {} }) => {
   const [upDate, setUpDate] = useState(false);
   const [wishList, setWishList] = useState([]);
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  //Authenticating the user
+  const googleProvider = new GoogleAuthProvider();
+
+  const signInWithGoogle = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  const createUserWithEmail = (email, password, name) => {
+    return createUserWithEmailAndPassword(auth, email, password, name);
+  };
+
+  const signInWithEmail = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signOutUser = () => {
+    return signOut(auth);
+  };
 
   const getProductsByCategory = (category) => {
     setFilteredProducts(
@@ -55,6 +85,24 @@ const ContextProvider = ({ children = {} }) => {
     return count;
   };
 
+  //get Current User
+
+  useEffect(() => {
+    const currentUser = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      currentUser();
+    };
+  }, []);
+
   useEffect(() => {
     fetch("/data.json")
       .then((res) => res.json())
@@ -79,6 +127,8 @@ const ContextProvider = ({ children = {} }) => {
     setCart(getCartData);
   }, [upDate]);
 
+  //console.log(user);
+
   return (
     <GadgetContext.Provider
       value={{
@@ -96,6 +146,13 @@ const ContextProvider = ({ children = {} }) => {
         setWishList,
         cart,
         quantity,
+        signInWithGoogle,
+        user,
+        createUserWithEmail,
+        signInWithEmail,
+        signOutUser,
+        setLoading,
+        loading,
       }}
     >
       {children}

@@ -34,7 +34,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
       });
   };
 
@@ -49,7 +49,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
       });
   };
 

@@ -33,7 +33,7 @@ const Register = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
       });
   };
 
@@ -48,7 +48,7 @@ const Register = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
       });
   };
 

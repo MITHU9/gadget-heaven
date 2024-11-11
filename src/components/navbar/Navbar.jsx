@@ -64,7 +64,7 @@ const Navbar = () => {
         location.pathname == "/home/Accessories" ||
         location.pathname == "/home/MacBook"
           ? "bg-primary  text-white/80"
-          : "w-full md:w-[90vw] mx-auto lg:px-20"
+          : "w-full md:w-[90vw] mx-auto lg:px-20 "
       }  rounded-lg rounded-bl-none rounded-br-none md:px-10`}
     >
       <div className="navbar-start">
@@ -102,6 +102,12 @@ const Navbar = () => {
             )}
             <li>
               <NavLink to="/feedback">Contact Us</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login">{user ? "Logout" : "Login"}</NavLink>
+            </li>
+            <li>
+              <NavLink to="/register">Register</NavLink>
             </li>
           </ul>
         </div>
@@ -167,11 +173,11 @@ const Navbar = () => {
       <div className="navbar-end flex gap-3 items-center md:gap-6">
         <div className="flex items-center gap-3 relative">
           <a
-            onClick={handleCart}
+            onClick={user ? handleCart : ""}
             className="p-2 bg-white text-black relative cursor-pointer rounded-full"
           >
             <FaShoppingCart />
-            {cart.length > 0 && (
+            {user && cart.length > 0 && (
               <span className="absolute -top-5 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">
                 {cart.length}
               </span>
@@ -179,7 +185,7 @@ const Navbar = () => {
           </a>
           <a className="p-2 cursor-pointer relative text-black bg-white rounded-full mr-1">
             <CiHeart />
-            {wishList.length > 0 && (
+            {user && wishList.length > 0 && (
               <span className="absolute -top-4 -right-2 px-2 py-0.5 rounded-full text-red-500 font-bold bg-white">
                 {wishList.length}
               </span>
@@ -207,14 +213,14 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3">
           <NavLink
             to="/login"
             onClick={user ? handleSignOut : ""}
             className={({ isActive }) =>
               isActive
                 ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
-                : "btn text-gray-400 bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
+                : "btn bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
             }
           >
             {user ? "Logout" : "Login"}
@@ -225,7 +231,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
-                  : "btn text-gray-400 bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
+                  : "btn bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
               }
             >
               Register

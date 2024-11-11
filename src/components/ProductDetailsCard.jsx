@@ -6,8 +6,15 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import ReactStars from "react-rating-stars-component";
 
 const ProductDetailsCard = ({ details }) => {
-  const { addGadgetToCart, addToWishlist, wishList, cart, products, quantity } =
-    useGadgetContext();
+  const {
+    addGadgetToCart,
+    addToWishlist,
+    wishList,
+    cart,
+    products,
+    quantity,
+    user,
+  } = useGadgetContext();
 
   const items = quantity(cart);
 
@@ -19,21 +26,35 @@ const ProductDetailsCard = ({ details }) => {
   }, 0);
 
   const handleAddToCart = (id, price) => {
-    if (parseInt(totalCost) < 5000 && price < 5000 - parseInt(totalCost)) {
-      addGadgetToCart(id);
-      toast.success("Item Added to cart Successfully", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+    if (user) {
+      if (parseInt(totalCost) < 5000 && price < 5000 - parseInt(totalCost)) {
+        addGadgetToCart(id);
+        toast.success("Item Added to cart Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else {
+        toast.error("You can`t add to cart more than $5000", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     } else {
-      toast.error("You can`t add to cart more than $5000", {
+      toast.error("Please Login to add items to cart", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -48,22 +69,35 @@ const ProductDetailsCard = ({ details }) => {
   };
 
   const handleWishlist = (id) => {
-    addToWishlist(id);
-
-    if (wishList.includes(id)) {
-      toast.warn("Remove item from Wishlist", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+    if (user) {
+      addToWishlist(id);
+      if (wishList.includes(id)) {
+        toast.warn("Remove item from Wishlist", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else {
+        toast.success("Item Added to Wishlist Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     } else {
-      toast.success("Item Added to Wishlist Successfully", {
+      toast.error("Please Login to add items to Wishlist", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,

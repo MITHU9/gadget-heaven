@@ -11,6 +11,7 @@ import ProductDetails from "./components/productDetails/ProductDetails.jsx";
 import Contact from "./components/contact/Contact.jsx";
 import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
+import PrivateRoutes from "./routes/PrivateRoutes.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivateRoutes>
+            <Dashboard />
+          </PrivateRoutes>
+        ),
         loader: () => fetch("/data.json").then((res) => res.json()),
       },
       {

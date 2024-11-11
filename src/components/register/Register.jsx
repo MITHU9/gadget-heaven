@@ -4,12 +4,23 @@ import { Helmet } from "react-helmet-async";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { useGadgetContext } from "../../context/Context";
-import { Bounce, toast } from "react-toastify";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
+import { useState } from "react";
+import { sendEmailVerification } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
 const Register = () => {
-  const { signInWithGoogle, createUserWithEmail, setLoading } =
-    useGadgetContext();
+  const {
+    signInWithGoogle,
+    createUserWithEmail,
+    setLoading,
+    loading,
+    signInWithGithub,
+  } = useGadgetContext();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
@@ -17,14 +28,27 @@ const Register = () => {
         if (res.user) {
           //console.log(res.user);
           navigate("/");
-          setLoading(true);
         } else {
           console.log("User not found");
         }
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
+      });
+  };
+
+  const handleGithubSignIn = () => {
+    signInWithGithub()
+      .then((res) => {
+        if (res.user) {
+          //console.log(res.user);
+          navigate("/");
+        } else {
+          console.log("User not found");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -34,50 +58,32 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters or long");
+      return;
+    }
+
     createUserWithEmail(email, password, name)
       .then((res) => {
         if (res.user) {
-          toast.success("Registration Successful", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
+          sendEmailVerification(auth.currentUser).then(() => {
+            console.log("Verification Email Sent");
           });
           navigate("/login");
-          setLoading(true);
         } else {
-          toast.error("Registration Failed", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          setError("Registration Failed");
+          setLoading(false);
         }
       })
       .catch((err) => {
-        toast.error(`${err.message}`, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        setError(err.message);
+        setLoading(false);
       });
   };
+
+  if (loading) {
+    return <span className="loading loading-bars loading-lg"></span>;
+  }
 
   return (
     <div>
@@ -101,7 +107,10 @@ const Register = () => {
               <FaGoogle />
               Google
             </button>
-            <button className="btn btn-primary hover:bg-primary">
+            <button
+              onClick={handleGithubSignIn}
+              className="btn btn-primary hover:bg-primary"
+            >
               <FaGithub />
               Github
             </button>
@@ -132,23 +141,39 @@ const Register = () => {
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
                 required
               />
+              {showPassword ? (
+                <IoMdEyeOff
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[53px]"
+                />
+              ) : (
+                <IoMdEye
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[53px]"
+                />
+              )}
             </div>
             <div className="form-control mt-6">
               <button className="btn bg-primary text-white hover:text-primary">
                 Register
               </button>
             </div>
+            {error && (
+              <div className="text-red-600">
+                <label>{error}</label>
+              </div>
+            )}
           </form>
           <div className="py-2 ml-8">
             <p>

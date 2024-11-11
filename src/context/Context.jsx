@@ -6,8 +6,10 @@ import {
 } from "../utility/AddToLocalStorage";
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -35,21 +37,33 @@ const ContextProvider = ({ children = {} }) => {
 
   //Authenticating the user
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const signInWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  const signInWithGithub = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
   const createUserWithEmail = (email, password, name) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password, name);
   };
 
   const signInWithEmail = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOutUser = () => {
+    setLoading(true);
     return signOut(auth);
+  };
+
+  const forgotPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
 
   const getProductsByCategory = (category) => {
@@ -153,6 +167,8 @@ const ContextProvider = ({ children = {} }) => {
         signOutUser,
         setLoading,
         loading,
+        forgotPassword,
+        signInWithGithub,
       }}
     >
       {children}

@@ -214,7 +214,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               isActive
                 ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
-                : "btn bg-gray-300 text-primary rounded-full px-8 hover:bg-primary hover:text-gray-200"
+                : "btn text-gray-400 bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
             }
           >
             {user ? "Logout" : "Login"}
@@ -225,7 +225,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
-                  : "btn bg-gray-300 text-primary rounded-full px-8 hover:bg-primary hover:text-gray-200"
+                  : "btn text-gray-400 bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
               }
             >
               Register

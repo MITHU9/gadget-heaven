@@ -4,13 +4,54 @@ import { Helmet } from "react-helmet-async";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { useGadgetContext } from "../../context/Context";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const emailRef = useRef(null);
 
-  const { signInWithEmail, setLoading } = useGadgetContext();
+  const {
+    signInWithGoogle,
+    signInWithEmail,
+    setLoading,
+    loading,
+    forgotPassword,
+    signInWithGithub,
+  } = useGadgetContext();
   const navigate = useNavigate();
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((res) => {
+        if (res.user) {
+          //console.log(res.user);
+          navigate("/");
+        } else {
+          console.log("User not found");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleGithubSignIn = () => {
+    signInWithGithub()
+      .then((res) => {
+        if (res.user) {
+          //console.log(res.user);
+          navigate("/");
+        } else {
+          console.log("User not found");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -22,11 +63,17 @@ const Login = () => {
       signInWithEmail(email, password)
         .then((res) => {
           if (res.user) {
-            navigate("/");
-            setLoading(false);
-            setError(null);
+            if (res.user.emailVerified) {
+              navigate("/");
+              setLoading(false);
+              setError(null);
+            } else {
+              setError("Please verify your email address");
+              setLoading(false);
+            }
           } else {
             setError("User not found");
+            setLoading(false);
           }
         })
         .catch((err) => {
@@ -37,6 +84,10 @@ const Login = () => {
       setError("Please accept terms and conditions");
     }
   };
+
+  if (loading) {
+    return <span className="loading loading-bars loading-lg"></span>;
+  }
 
   return (
     <div>
@@ -53,11 +104,17 @@ const Login = () => {
             className="flex items-center justify-center mt-6
            gap-3"
           >
-            <button className="btn bg-primary text-white hover:text-primary">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn bg-primary text-white hover:text-primary"
+            >
               <FaGoogle />
               Google
             </button>
-            <button className="btn btn-primary hover:bg-primary">
+            <button
+              onClick={handleGithubSignIn}
+              className="btn btn-primary hover:bg-primary"
+            >
               <FaGithub />
               Github
             </button>
@@ -71,24 +128,50 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
+                ref={emailRef}
                 placeholder="email"
                 className="input input-bordered"
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
                 required
               />
+
+              {showPassword ? (
+                <IoMdEyeOff
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[53px]"
+                />
+              ) : (
+                <IoMdEye
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[53px]"
+                />
+              )}
+
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <a
+                  onClick={() =>
+                    forgotPassword(emailRef.current.value)
+                      .then(() => {
+                        alert("Check your email to reset password");
+                      })
+                      .catch((err) => {
+                        setError(err.message);
+                      })
+                  }
+                  href="#"
+                  className="label-text-alt link link-hover"
+                >
                   Forgot password?
                 </a>
               </label>

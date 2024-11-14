@@ -7,8 +7,6 @@ import { useGadgetContext } from "../../context/Context";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { useState } from "react";
-import { sendEmailVerification } from "firebase/auth";
-import { auth } from "../lib/firebase";
 
 const Register = () => {
   const {
@@ -17,6 +15,7 @@ const Register = () => {
     setLoading,
     loading,
     signInWithGithub,
+    updateUser,
   } = useGadgetContext();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -27,7 +26,7 @@ const Register = () => {
       .then((res) => {
         if (res.user) {
           //console.log(res.user);
-          navigate("/");
+          navigate("/login");
         } else {
           console.log("User not found");
         }
@@ -55,6 +54,7 @@ const Register = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
+    const photo = e.target.photoURL.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -66,10 +66,14 @@ const Register = () => {
     createUserWithEmail(email, password, name)
       .then((res) => {
         if (res.user) {
-          sendEmailVerification(auth.currentUser).then(() => {
-            console.log("Verification Email Sent");
-          });
-          navigate("/login");
+          updateUser({ displayName: name, photoURL: photo })
+            .then(() => {
+              console.log("User Updated");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          navigate("/");
         } else {
           setError("Registration Failed");
           setLoading(false);
@@ -82,7 +86,11 @@ const Register = () => {
   };
 
   if (loading) {
-    return <span className="loading loading-bars loading-lg"></span>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
   }
 
   return (
@@ -127,6 +135,17 @@ const Register = () => {
                 placeholder="name"
                 className="input input-bordered"
                 required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">PhotoURL</span>
+              </label>
+              <input
+                type="text"
+                name="photoURL"
+                placeholder="PhotoURL"
+                className="input input-bordered"
               />
             </div>
             <div className="form-control">

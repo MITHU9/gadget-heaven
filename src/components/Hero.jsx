@@ -1,6 +1,7 @@
 import { useLocation, useParams } from "react-router-dom";
 
-const Hero = ({ children, title, description }) => {
+const Hero = (props = {}) => {
+  const { children, title, description } = props || {};
   const location = useLocation();
   const { id } = useParams();
 

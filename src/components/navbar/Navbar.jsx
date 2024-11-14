@@ -4,6 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useGadgetContext } from "../../context/Context";
 import { useEffect } from "react";
 import { getWishListData } from "../../utility/AddToLocalStorage";
+import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   const location = useLocation();
@@ -49,10 +50,6 @@ const Navbar = () => {
   }, [upDate]);
 
   //console.log(user);
-
-  if (loading) {
-    return <span className="loading loading-bars loading-lg"></span>;
-  }
 
   return (
     <div
@@ -104,11 +101,28 @@ const Navbar = () => {
               <NavLink to="/feedback">Contact Us</NavLink>
             </li>
             <li>
-              <NavLink to="/login">{user ? "Logout" : "Login"}</NavLink>
+              <NavLink to="/login">
+                {user ? (
+                  <span className="flex items-center gap-1">
+                    {user.photoURL ? (
+                      <img src={user.photoURL} alt="user" />
+                    ) : (
+                      <CgProfile className="size-5 mt-.5" />
+                    )}
+                    Logout
+                  </span>
+                ) : (
+                  "Login"
+                )}
+              </NavLink>
             </li>
-            <li>
-              <NavLink to="/register">Register</NavLink>
-            </li>
+            {user ? (
+              ""
+            ) : (
+              <li>
+                <NavLink to="/register">Register</NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl md:text-2xl font-bold ">
@@ -120,7 +134,6 @@ const Navbar = () => {
           <li className=" hover:text-black rounded-lg">
             <NavLink
               to="/"
-              isActive={true}
               className={({ isActive }) =>
                 isActive
                   ? "bg-gray-300 text-primary  p-2 rounded-lg"
@@ -173,7 +186,7 @@ const Navbar = () => {
       <div className="navbar-end flex gap-3 items-center md:gap-6">
         <div className="flex items-center gap-3 relative">
           <a
-            onClick={user ? handleCart : ""}
+            onClick={handleCart}
             className="p-2 bg-white text-black relative cursor-pointer rounded-full"
           >
             <FaShoppingCart />
@@ -213,17 +226,32 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <NavLink
             to="/login"
-            onClick={user ? handleSignOut : ""}
+            onClick={user ? handleSignOut : null}
             className={({ isActive }) =>
               isActive
                 ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
                 : "btn bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
             }
           >
-            {user ? "Logout" : "Login"}
+            {user ? (
+              <span className="flex items-center gap-1">
+                {user?.photoURL ? (
+                  <img
+                    className="size-6 mt-0.5 rounded-full"
+                    src={user?.photoURL}
+                    alt="userPhoto"
+                  />
+                ) : (
+                  <CgProfile className="size-5 mt-.5" />
+                )}
+                Logout
+              </span>
+            ) : (
+              "Login"
+            )}
           </NavLink>
           {!user && (
             <NavLink

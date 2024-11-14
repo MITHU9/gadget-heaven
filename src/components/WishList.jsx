@@ -7,7 +7,9 @@ import {
 } from "../utility/AddToLocalStorage";
 import { useEffect, useState } from "react";
 
-const WishList = ({ data, setValue }) => {
+const WishList = (props = {}) => {
+  const { data, setValue } = props || {};
+
   const { addGadgetToCart, upDate, cart, quantity, setWishList, wishList } =
     useGadgetContext();
 

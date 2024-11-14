@@ -11,7 +11,11 @@ const Home = () => {
   const { loading } = useGadgetContext();
 
   if (loading) {
-    return <span className="loading loading-bars loading-lg"></span>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
   }
 
   return (

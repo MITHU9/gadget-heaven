@@ -13,6 +13,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../components/lib/firebase";
 
@@ -55,6 +56,10 @@ const ContextProvider = ({ children = {} }) => {
   const signInWithEmail = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const updateUser = (updateData) => {
+    return updateProfile(auth.currentUser, updateData);
   };
 
   const signOutUser = () => {
@@ -169,6 +174,7 @@ const ContextProvider = ({ children = {} }) => {
         loading,
         forgotPassword,
         signInWithGithub,
+        updateUser,
       }}
     >
       {children}

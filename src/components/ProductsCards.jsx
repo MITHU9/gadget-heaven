@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useGadgetContext } from "../context/Context";
 
-const ProductsCards = ({ product }) => {
+const ProductsCards = (props = {}) => {
+  const { product } = props || {};
+
   const { getProductById } = useGadgetContext();
 
   return (

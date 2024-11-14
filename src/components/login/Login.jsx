@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Hero from "../Hero";
 import { Helmet } from "react-helmet-async";
 import { FaGoogle } from "react-icons/fa";
@@ -12,6 +12,8 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const emailRef = useRef(null);
+  const location = useLocation();
+  //console.log(location);
 
   const {
     signInWithGoogle,
@@ -28,7 +30,7 @@ const Login = () => {
       .then((res) => {
         if (res.user) {
           //console.log(res.user);
-          navigate("/");
+          navigate(location.state ? location.state : "/");
         } else {
           console.log("User not found");
         }
@@ -43,7 +45,7 @@ const Login = () => {
       .then((res) => {
         if (res.user) {
           //console.log(res.user);
-          navigate("/");
+          navigate(location.state ? location.state : "/");
         } else {
           console.log("User not found");
         }
@@ -63,14 +65,9 @@ const Login = () => {
       signInWithEmail(email, password)
         .then((res) => {
           if (res.user) {
-            if (res.user.emailVerified) {
-              navigate("/");
-              setLoading(false);
-              setError(null);
-            } else {
-              setError("Please verify your email address");
-              setLoading(false);
-            }
+            navigate(location.state ? location.state : "/");
+            setLoading(false);
+            setError(null);
           } else {
             setError("User not found");
             setLoading(false);
@@ -86,7 +83,11 @@ const Login = () => {
   };
 
   if (loading) {
-    return <span className="loading loading-bars loading-lg"></span>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
   }
 
   return (

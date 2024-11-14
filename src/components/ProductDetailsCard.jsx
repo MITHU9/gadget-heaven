@@ -5,7 +5,9 @@ import { useGadgetContext } from "../context/Context";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import ReactStars from "react-rating-stars-component";
 
-const ProductDetailsCard = ({ details }) => {
+const ProductDetailsCard = (props = {}) => {
+  const { details } = props || {};
+
   const {
     addGadgetToCart,
     addToWishlist,

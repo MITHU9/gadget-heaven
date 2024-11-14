@@ -6,7 +6,9 @@ import { removeFromCartLocalStorage } from "../utility/AddToLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { useGadgetContext } from "../context/Context";
 
-const Cart = ({ cartItem }) => {
+const Cart = (props = {}) => {
+  const { cartItem } = props || {};
+
   const { quantity, cart } = useGadgetContext();
   const [render, setRender] = useState(false);
   const route = useNavigate();

@@ -25,7 +25,9 @@ function App() {
             } px-2 md:px-5`}
           >
             <Navbar />
-            <Outlet />
+            <main className="mt-[76px]">
+              <Outlet />
+            </main>
           </div>
           <Footer />
         </div>

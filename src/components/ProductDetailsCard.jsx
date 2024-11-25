@@ -172,7 +172,7 @@ const ProductDetailsCard = (props = {}) => {
                 ${
                   wishList.includes(details.product_id)
                     ? "disabled:opacity-50 bg-gray-600 cursor-not-allowed text-white"
-                    : "bg-white text-black"
+                    : "bg-white text-black hover:bg-gray-200"
                 }
                  border p-2 rounded-full text-lg`}
             >

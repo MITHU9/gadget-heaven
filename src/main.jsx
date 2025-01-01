@@ -47,7 +47,11 @@ const router = createBrowserRouter([
 
       {
         path: "/product-details/:id",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoutes>
+            <ProductDetails />
+          </PrivateRoutes>
+        ),
         loader: () => fetch("/data.json").then((res) => res.json()),
       },
       {

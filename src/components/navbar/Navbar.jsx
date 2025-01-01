@@ -106,7 +106,11 @@ const Navbar = () => {
                   {user ? (
                     <span className="flex items-center gap-1">
                       {user.photoURL ? (
-                        <img src={user.photoURL} alt="user" />
+                        <img
+                          className="size-5 rounded-full"
+                          src={user.photoURL}
+                          alt="user"
+                        />
                       ) : (
                         <CgProfile className="size-5 mt-.5" />
                       )}
@@ -259,7 +263,7 @@ const Navbar = () => {
                 to="/register"
                 className={({ isActive }) =>
                   isActive
-                    ? "btn bg-primary text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
+                    ? "btn bg-primary md:hidden text-gray-200 rounded-full px-8 hover:bg-gray-300 hover:text-primary"
                     : "btn bg-transparent rounded-full px-8 hover:bg-gray-300 hover:text-primary"
                 }
               >

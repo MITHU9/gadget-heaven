@@ -1,10 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useGadgetContext } from "../context/Context";
 
 const ProductsCards = (props = {}) => {
   const { product } = props || {};
-
-  const { getProductById } = useGadgetContext();
 
   return (
     <div className="p-3">
@@ -21,13 +19,12 @@ const ProductsCards = (props = {}) => {
           <p className="text-gray-600 font-semibold py-2">
             Price: ${product.price}
           </p>
-          <NavLink
-            onClick={() => getProductById(product.product_id)}
+          <Link
             to={`/product-details/${product.product_id}`}
             className="py-1 px-3 border border-primary rounded-full text-primary font-semibold hover:bg-primary hover:text-white"
           >
             View Details
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>

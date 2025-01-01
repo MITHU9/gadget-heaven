@@ -77,10 +77,6 @@ const ContextProvider = ({ children = {} }) => {
     );
   };
 
-  const getProductById = (id) => {
-    return products.find((product) => product.product_id === id);
-  };
-
   const addGadgetToCart = (id) => {
     addToCartLocalStorage(id);
     setUpDate(!upDate);
@@ -156,7 +152,6 @@ const ContextProvider = ({ children = {} }) => {
         category,
         setCategory,
         getProductsByCategory,
-        getProductById,
         filteredProducts,
         addGadgetToCart,
         addToWishlist,
